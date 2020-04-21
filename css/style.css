@@ -1,0 +1,74 @@
+body {
+	background-color: black;
+}
+
+.disable {
+	pointer-events: none;
+}
+
+.simon-says {
+	width: 604px;
+	margin: 30px auto 0 auto;
+	position: relative;
+}
+
+.simon-says div[id^="button-"] {
+	float: left;
+	width: 302px;
+	height: 302px;
+}		
+
+.simon-says div[id^="button-"] a {
+	display: block;
+	height: 302px;
+}
+
+.simon-says::before, .simon-says::after,
+#score::before, #score::after {
+	display: table;
+	content: "";
+	line-height: 0;
+}
+
+.simon-says::after,
+#score::after {
+	clear: both;
+}
+
+#new {
+	position: absolute;
+	width: 140px;
+	height: 140px;
+	left: 232px;
+	top: 232px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#score {
+	position: absolute;
+	left: 274px;
+	top: 292px;
+	width: 56px;
+	height: 45px;
+}
+
+#score img {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+#button-green a { 			background-image: url("../images/simon-says-green-off.jpg"); }
+#button-red a { 			background-image: url("../images/simon-says-red-off.jpg"); }
+#button-yellow a { 			background-image: url("../images/simon-says-yellow-off.jpg"); }
+#button-cyan a { 			background-image: url("../images/simon-says-cyan-off.jpg"); }
+
+#button-green.active a { 	background-image: url("../images/simon-says-green-on.jpg"); }
+#button-red.active a { 		background-image: url("../images/simon-says-red-on.jpg"); }
+#button-yellow.active a { 	background-image: url("../images/simon-says-yellow-on.jpg"); }
+#button-cyan.active a { 	background-image: url("../images/simon-says-cyan-on.jpg"); }
+
+#preload {
+	display: none;
+}
