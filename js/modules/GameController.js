@@ -124,9 +124,13 @@ export default class GameController
     lose() {
         this.preventClick();
 
-        this.score.clear();
+        setTimeout(_ => {
+            this.audio.loseAudio();
 
-        this.score.changeNumber();
+            this.score.clear();
+    
+            this.score.changeNumber();
+        }, 800);
     }
 
     _win() {
