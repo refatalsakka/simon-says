@@ -59,10 +59,12 @@ export default class GameController
         this.pcBtns.push(btn);
     }
 
-    addUserBtn(elm) {
-        const btn = this.settings.btns[elm.querySelector('a').dataset.nbr - 1];
+    getBtn(elm) {
+        return this.settings.btns[elm.querySelector('a').dataset.nbr - 1];
+    }
 
-        this.userBtns.push(btn);
+    addUserBtn(elm) {
+        this.userBtns.push(this.getBtn(elm));
     }
 
     showPcBtns() {
@@ -95,8 +97,10 @@ export default class GameController
 
     btnsEvents() {
         this.btnsElms.forEach(btn => {
-            btn.addEventListener('click', () => {
-                this.addUserBtn(btn)
+            btn.addEventListener('click', _ => {
+                eval(`this.light._${this.getBtn(btn)}()`);
+
+                this.addUserBtn(btn);
 
                 if (this.continue() === true) return this._win();
 
