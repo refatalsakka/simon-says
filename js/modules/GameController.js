@@ -107,8 +107,6 @@ export default class GameController
 
     continue() {
         if (this.pcBtns.join('').indexOf(this.userBtns.join('')) === 0) {
-            this.score.up();
-
             return true;
         }
 
@@ -117,10 +115,18 @@ export default class GameController
 
     lose() {
         this.preventClick();
+
+        this.score.clear();
+
+        this.score.changeNumber();
     }
 
     _win() {
         if (!this.helpers.areArraysEqual(this.pcBtns, this.userBtns)) return false;
+
+        this.score.up();
+
+        this.score.changeNumber();
 
         this.setBtns();
     }
@@ -129,6 +135,8 @@ export default class GameController
         this.pcBtns = [];
 
         this.score.clear();
+
+        this.score.changeNumber();
 
         this.setBtns();
     }
