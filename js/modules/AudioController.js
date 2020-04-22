@@ -5,6 +5,7 @@ export default class GameController
         this.red = new Audio('sounds/red.mp3');
         this.yellow = new Audio('sounds/yellow.mp3');
         this.cyan = new Audio('sounds/cyan.mp3'); 
+        this.click = new Audio('sounds/click.mp3');
     }
 
     greenAudio() {
@@ -21,5 +22,9 @@ export default class GameController
     
     cyanAudio() {
         this.cyan.play();
+    }
+
+    clickAudio() {
+        this.click.play();
     }
 }

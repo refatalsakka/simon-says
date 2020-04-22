@@ -13,15 +13,16 @@ export default class LightController
 
     greenOn() {
         this.green.classList.add('active');
-        this.audio.greenAudio();
     }
 
     greenOff() {
         this.green.classList.remove('active');
     }
 
-    _green() {
+    _green(audio = true) {
         this.greenOn();
+
+        if (audio) this.audio.greenAudio();;
 
         setTimeout(() => {
             this.greenOff();
@@ -30,15 +31,16 @@ export default class LightController
 
     redOn() {
         this.red.classList.add('active');
-        this.audio.redAudio();
     }
 
     redOff() {
         this.red.classList.remove('active');
     }
 
-    _red() {
+    _red(audio = true) {
         this.redOn();
+
+        if (audio) this.audio.redAudio();
         
         setTimeout(() => {
             this.redOff();
@@ -47,15 +49,16 @@ export default class LightController
 
     yellowOn() {
         this.yellow.classList.add('active');
-        this.audio.yellowAudio();
     }
 
     yellowOff() {
         this.yellow.classList.remove('active');
     }
 
-    _yellow() {
+    _yellow(audio = true) {
         this.yellowOn();
+
+        if (audio) this.audio.yellowAudio();
         
         setTimeout(() => {
             this.yellowOff();
@@ -64,16 +67,17 @@ export default class LightController
     
     cyanOn() {
         this.cyan.classList.add('active');
-        this.audio.cyanAudio();
     }
 
     cyanOff() {
         this.cyan.classList.remove('active');
     }
 
-    _cyan() {
+    _cyan(audio = true) {
         this.cyanOn();
         
+        if (audio) this.audio.cyanAudio();
+
         setTimeout(() => {
             this.cyanOff();
         }, 500);

@@ -1,6 +1,7 @@
 import HelpersController from './HelpersController.js';
 import LightController from './LightController.js';
 import ScoreController from './ScoreController.js';
+import AudioController from './AudioController.js';
 
 export default class GameController
 {
@@ -14,6 +15,7 @@ export default class GameController
         this.helpers = new HelpersController();
         this.light = new LightController();
         this.score = new ScoreController();
+        this.audio = new AudioController();
 
         
         this.settings = {
@@ -98,7 +100,9 @@ export default class GameController
     btnsEvents() {
         this.btnsElms.forEach(btn => {
             btn.addEventListener('click', _ => {
-                eval(`this.light._${this.getBtn(btn)}()`);
+                eval(`this.light._${this.getBtn(btn)}(false)`);
+                
+                this.audio.clickAudio();
 
                 this.addUserBtn(btn);
 
