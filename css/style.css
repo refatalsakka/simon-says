@@ -1,7 +1,12 @@
 body {
 	background-color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
 }
-
 
 .disable {
 	pointer-events: none;
@@ -9,8 +14,8 @@ body {
 
 .simon-says {
 	width: 604px;
-	margin: 30px auto 0 auto;
 	position: relative;
+
 }
 
 .simon-says div[id^="button-"] {
