@@ -1,4 +1,4 @@
-export default class GameController
+export default class AudioController
 {
     constructor() {
         this.green = new Audio('sounds/green.mp3');
