@@ -1,4 +1,4 @@
-import HelpersController from './HelpersController.js';
+import {areArraysEqual} from '../helpers.js';
 import LightController from './LightController.js';
 import ScoreController from './ScoreController.js';
 import AudioController from './AudioController.js';
@@ -12,7 +12,6 @@ export default class GameController
 
         this.first = true;
         
-        this.helpers = new HelpersController();
         this.light = new LightController();
         this.score = new ScoreController();
         this.audio = new AudioController();
@@ -134,7 +133,7 @@ export default class GameController
     }
 
     _win() {
-        if (!this.helpers.areArraysEqual(this.pcBtns, this.userBtns)) return false;
+        if (!areArraysEqual(this.pcBtns, this.userBtns)) return false;
 
         this.score.up();
 
