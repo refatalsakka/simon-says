@@ -7,13 +7,6 @@ export default class ScoreController {
         this.tens = 0;
     }
 
-    clear() {
-        this.monad = 0;
-        this.tens = 0;
-
-        this.editHtml();
-    }
-
     plusMonad() {
         this.monad = this.monad + 1;
     }
@@ -31,6 +24,13 @@ export default class ScoreController {
         this.leftImg.src = "images/digit-" + this.tens + ".jpg";
     }
 
+    clear() {
+        this.monad = 0;
+        this.tens = 0;
+
+        this.editHtml();
+    }
+    
     plus() {
         if (this.monad < 9) {
             this.plusMonad();
