@@ -1,35 +1,44 @@
-export default class ScoreController
-{   
+export default class ScoreController {
     constructor() {
-        this.score = 0;
-        this.imgs = [...document.querySelectorAll('#score img')];
-        this.left = this.imgs[0];
-        this.right = this.imgs[1];
-        this.count = 0;
-    }
-
-    up() {
-        this.score = this.score + 1;
+        this.imgs = document.querySelectorAll("#score img");
+        this.leftImg = this.imgs[0];
+        this.rightImg = this.imgs[1];
+        this.monad = 0;
+        this.tens = 0;
     }
 
     clear() {
-        this.score = 0;
-        this.count = 0;
+        this.monad = 0;
+        this.tens = 0;
+
+        this.editHtml();
     }
 
-    changeNumber() {
-        if (this.score < 10) {
-            this.right.src = `images/digit-${this.score}.jpg`;
+    plusMonad() {
+        this.monad = this.monad + 1;
+    }
 
+    clearMonad() {
+        this.monad = 0;
+    }
+
+    plusTens() {
+        this.tens = this.tens + 1;
+    }
+
+    editHtml() {
+        this.rightImg.src = "images/digit-" + this.monad + ".jpg";
+        this.leftImg.src = "images/digit-" + this.tens + ".jpg";
+    }
+
+    plus() {
+        if (this.monad < 9) {
+            this.plusMonad();
         } else {
-            this.score = 0;
-
-            this.count = this.count + 1;
-
-            this.right.src = `images/digit-0.jpg`;
-
-            this.left.src = `images/digit-${this.count}.jpg`;
+            this.plusTens();
+            this.clearMonad();
         }
-    }
 
+        this.editHtml();
+    }
 }

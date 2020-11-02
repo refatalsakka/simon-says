@@ -127,17 +127,13 @@ export default class GameController
             this.audio.loseAudio();
 
             this.score.clear();
-    
-            this.score.changeNumber();
         }, 800);
     }
 
     _win() {
         if (!areArraysEqual(this.pcBtns, this.userBtns)) return false;
 
-        this.score.up();
-
-        this.score.changeNumber();
+        this.score.plus();
 
         this.setBtns();
     }
@@ -146,8 +142,6 @@ export default class GameController
         this.pcBtns = [];
 
         this.score.clear();
-
-        this.score.changeNumber();
 
         this.setBtns();
     }
