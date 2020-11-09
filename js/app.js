@@ -10,7 +10,7 @@ import UserController from './modules/UserController.js';
   const settings = {
     btns: ['green', 'red', 'yellow', 'cyan'],
     speed: 1000,
-    waitingToEnable: 0,
+    waitingToEnable: 1000,
   }
 
   const active = new ActiveController(settings);
@@ -20,7 +20,7 @@ import UserController from './modules/UserController.js';
   const score = new ScoreController(settings);
   const user = new UserController(settings);
   const game = new GameController(score, audio, pc, user, buttons);
-  
+
   let first = true;
 
   document.querySelector('#new').addEventListener('click', _ => {
@@ -32,10 +32,9 @@ import UserController from './modules/UserController.js';
       btn.addEventListener('click', _ => {
         eval(`active.${buttons.getOne(btn)}(false)`);
 
-        settings.waitingToEnable = (pc.getBtns().length * (settings.speed / 2));
+        settings.waitingToEnable = ((pc.getBtns().length * settings.speed) + settings.speed);
 
         audio.clickAudio();
-
         user.addBtn(buttons.getOne(btn));
 
         if (game.continue() === true) return game._win();
