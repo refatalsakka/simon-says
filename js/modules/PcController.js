@@ -12,8 +12,6 @@ export default class PcController {
     const btn = this.settings.btns[Math.floor(Math.random() * 4)];
 
     this.btns.push(btn);
-
-    this.settings.waitingToEnable = (this.getBtns().length * 1000) + 1000;
   }
 
   getBtns() {
@@ -40,7 +38,6 @@ export default class PcController {
 
   play() {
     this.addBtn();
-
     this.activeBtns();
   }
 }
