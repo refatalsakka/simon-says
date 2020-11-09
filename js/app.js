@@ -24,15 +24,17 @@ import UserController from './modules/UserController.js';
   let first = true;
 
   document.querySelector('#new').addEventListener('click', _ => {
+    settings.waitingToEnable = settings.speed;
+    
     game._new();
 
     if (!first) return;
 
     buttons.get().forEach(btn => {
       btn.addEventListener('click', _ => {
-        eval(`active.${buttons.getOne(btn)}(false)`);
+        active[buttons.getOne(btn)](false);
 
-        settings.waitingToEnable = ((pc.getBtns().length * settings.speed) + settings.speed);
+        settings.waitingToEnable = ((pc.getBtns().length * settings.speed) + settings.speed + 500);
 
         audio.clickAudio();
         user.addBtn(buttons.getOne(btn));

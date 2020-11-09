@@ -1,4 +1,4 @@
-import { areArraysEqual } from '../helpers.js';
+import { areArraysEqual, areFirstOfArraysEqual } from '../helpers.js';
 
 export default class GameController {
     constructor(score, audio, pc, user, buttons) {
@@ -18,10 +18,7 @@ export default class GameController {
     }
 
     continue() {
-        if (this.pc.getBtns().join('').indexOf(this.user.getBtns().join('')) === 0) {
-            return true;
-        }
-        return false;
+        return areFirstOfArraysEqual(this.pc.getBtns(), this.user.getBtns());
     }
 
     lose() {

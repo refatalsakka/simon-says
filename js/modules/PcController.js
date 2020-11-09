@@ -25,8 +25,7 @@ export default class PcController {
 
     const loop = setInterval(() => {
       if (this.i < this.btns.length) {
-        eval(`this.active.${this.btns[this.i]}(${this.settings.speed / 2})`);
-
+        this.active[this.btns[this.i]](this.settings.speed / 2);
         this.i++;
       } else {
         clearInterval(loop);
