@@ -1,11 +1,9 @@
-import ActiveController from './ActiveController.js';
-
 export default class PcController {
-  constructor(settings) {
+  constructor(settings, active) {
     this.settings = settings;
     this.btns = [];
 
-    this.active = new ActiveController(settings);
+    this.active = active;
   }
 
   addBtn() {

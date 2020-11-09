@@ -16,7 +16,7 @@ import UserController from './modules/UserController.js';
   const active = new ActiveController(settings);
   const audio = new AudioController();
   const buttons = new ButtonsController(settings);
-  const pc = new PcController(settings);
+  const pc = new PcController(settings, active);
   const score = new ScoreController(settings);
   const user = new UserController(settings);
   const game = new GameController(score, audio, pc, user, buttons);
