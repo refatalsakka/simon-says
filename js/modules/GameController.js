@@ -2,6 +2,9 @@ import { areArraysEqual } from '../helpers.js';
 import ActiveController from './ActiveController.js';
 import ScoreController from './ScoreController.js';
 import AudioController from './AudioController.js';
+import PcController from './PcController.js';
+import UserController from './UserController.js';
+import ButtonsController from './ButtonsController.js';
 
 export default class GameController {
     constructor() {
@@ -11,26 +14,28 @@ export default class GameController {
 
         this.first = true;
 
-        this.active = new ActiveController();
-        this.score = new ScoreController();
-        this.audio = new AudioController();
-
         this.settings = {
             btns: ['green', 'red', 'yellow', 'cyan'],
             speed: 1000,
+            waitingToEnable: 0,
         }
 
-        Object.freeze(this.settings);
+        this.score = new ScoreController();
+        this.audio = new AudioController();
+        this.active = new ActiveController(this.settings);
+        this.pc = new PcController(this.settings);
+        this.user = new UserController(this.settings);
+        this.buttons = new ButtonsController(this.settings);
 
-        this.btnsElms = [...document.querySelectorAll('.button')];
         this.new = document.querySelector('#new');
-
-        this.pcBtns = [];
-        this.userBtns = [];
     }
 
     start() {
-        this.playPc();
+        this.user.clearBtns()
+
+        this.pc.play();
+
+        this.buttons.enableAfterWhile();
 
         if (!this.first) return;
 
@@ -41,68 +46,15 @@ export default class GameController {
         this.first = false;
     }
 
-    playPc() {
-        this.userBtns = [];
-
-        this.addRandonBtn();
-
-        this.showPcBtns();
-
-        this.preventClick();
-
-        this.allowClick();
-    }
-
-    addRandonBtn() {
-        const btn = this.settings.btns[Math.floor(Math.random() * 4)];
-
-        this.pcBtns.push(btn);
-    }
-
-    getBtn(elm) {
-        return this.settings.btns[elm.querySelector('a').dataset.nbr - 1];
-    }
-
-    addUserBtn(elm) {
-        this.userBtns.push(this.getBtn(elm));
-    }
-
-    showPcBtns() {
-        this.i = 0;
-
-        const loop = setInterval(() => {
-            if (this.i < this.pcBtns.length) {
-                eval(`this.active.${this.pcBtns[this.i]}(${this.settings.speed / 2})`);
-
-                this.i++;
-            } else {
-                clearInterval(loop);
-            }
-        }, this.settings.speed);
-    }
-
-    preventClick() {
-        this.btnsElms.forEach(btn => {
-            btn.classList.add('disable');
-        });
-    }
-
-    allowClick() {
-        setTimeout(() => {
-            this.btnsElms.forEach(btn => {
-                btn.classList.remove('disable');
-            });
-        }, (this.pcBtns.length * 1000) + 1000);
-    }
 
     btnsEvents() {
-        this.btnsElms.forEach(btn => {
+        this.buttons.get().forEach(btn => {
             btn.addEventListener('click', _ => {
-                eval(`this.active.${this.getBtn(btn)}(500, false)`);
+                eval(`this.active.${this.buttons.getOne(btn)}(false)`);
 
                 this.audio.clickAudio();
 
-                this.addUserBtn(btn);
+                this.user.addBtn(this.buttons.getOne(btn));
 
                 if (this.continue() === true) return this._win();
 
@@ -112,7 +64,7 @@ export default class GameController {
     }
 
     continue() {
-        if (this.pcBtns.join('').indexOf(this.userBtns.join('')) === 0) {
+        if (this.pc.getBtns().join('').indexOf(this.user.getBtns().join('')) === 0) {
             return true;
         }
 
@@ -120,7 +72,7 @@ export default class GameController {
     }
 
     lose() {
-        this.preventClick();
+        this.buttons.disable();
 
         setTimeout(_ => {
             this.audio.loseAudio();
@@ -130,18 +82,26 @@ export default class GameController {
     }
 
     _win() {
-        if (!areArraysEqual(this.pcBtns, this.userBtns)) return false;
+        if (!areArraysEqual(this.pc.getBtns(), this.user.getBtns())) return false;
+        
+        this.user.clearBtns()
 
         this.score.plus();
 
-        this.playPc();
+        this.pc.play();
+
+        this.buttons.enableAfterWhile();
     }
 
     _new() {
-        this.pcBtns = [];
+        this.user.clearBtns()
+
+        this.pc.clearBtns()
 
         this.score.clear();
 
-        this.playPc();
+        this.pc.play();
+
+        this.buttons.enableAfterWhile();
     }
 }

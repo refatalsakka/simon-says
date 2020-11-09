@@ -2,48 +2,50 @@ import AudioController from './AudioController.js';
 import LightController from './LightController.js';
 
 export default class ActiveController {
-  constructor() {
+  constructor(settings) {
+    this.settings = settings;
+
     this.audio = new AudioController();
     this.light = new LightController();
   }
 
-  green(speed = 500, audio = true) {
+  green(audio = true) {
     this.light.greenOn();
 
     if (audio) this.audio.greenAudio();;
 
     setTimeout(() => {
       this.light.greenOff();
-    }, speed);
+    }, this.settings.speed / 2);
   }
 
-  red(speed = 500, audio = true) {
+  red(audio = true) {
     this.light.redOn();
 
     if (audio) this.audio.redAudio();
 
     setTimeout(() => {
       this.light.redOff();
-    }, speed);
+    }, this.settings.speed / 2);
   }
 
-  yellow(speed = 500, audio = true) {
+  yellow(audio = true) {
     this.light.yellowOn();
 
     if (audio) this.audio.yellowAudio();
 
     setTimeout(() => {
       this.light.yellowOff();
-    }, speed);
+    }, this.settings.speed / 2);
   }
 
-  cyan(speed = 500, audio = true) {
+  cyan(audio = true) {
     this.light.cyanOn();
 
     if (audio) this.audio.cyanAudio();
 
     setTimeout(() => {
       this.light.cyanOff();
-    }, speed);
+    }, this.settings.speed / 2);
   }
 }
