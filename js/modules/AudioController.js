@@ -1,34 +1,34 @@
 export default class AudioController {
-    constructor() {
-        this.green = new Audio('sounds/green.mp3');
-        this.red = new Audio('sounds/red.mp3');
-        this.yellow = new Audio('sounds/yellow.mp3');
-        this.cyan = new Audio('sounds/cyan.mp3');
-        this.click = new Audio('sounds/click.mp3');
-        this.lose = new Audio('sounds/lose.mp3');
-    }
+  constructor() {
+    this.green = new Audio('sounds/green.mp3');
+    this.red = new Audio('sounds/red.mp3');
+    this.yellow = new Audio('sounds/yellow.mp3');
+    this.cyan = new Audio('sounds/cyan.mp3');
+    this.click = new Audio('sounds/click.mp3');
+    this.lose = new Audio('sounds/lose.mp3');
+  }
 
-    greenAudio() {
-        this.green.play();
-    }
+  greenAudio() {
+    this.green.play();
+  }
 
-    redAudio() {
-        this.red.play();
-    }
+  redAudio() {
+    this.red.play();
+  }
 
-    yellowAudio() {
-        this.yellow.play();
-    }
+  yellowAudio() {
+    this.yellow.play();
+  }
 
-    cyanAudio() {
-        this.cyan.play();
-    }
+  cyanAudio() {
+    this.cyan.play();
+  }
 
-    clickAudio() {
-        this.click.play();
-    }
+  clickAudio() {
+    this.click.play();
+  }
 
-    loseAudio() {
-        this.lose.play();
-    }
+  loseAudio() {
+    this.lose.play();
+  }
 }

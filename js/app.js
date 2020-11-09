@@ -25,7 +25,7 @@ import UserController from './modules/UserController.js';
 
   document.querySelector('#new').addEventListener('click', _ => {
     settings.waitingToEnable = settings.speed;
-    
+
     game._new();
 
     if (!first) return;
