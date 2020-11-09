@@ -21,12 +21,12 @@ export default class PcController {
   }
 
   activeBtns() {
-    this.i = 0;
+    let i = 0;
 
     const loop = setInterval(() => {
-      if (this.i < this.btns.length) {
-        this.active[this.btns[this.i]](this.settings.speed / 2);
-        this.i++;
+      if (i < this.btns.length) {
+        this.active[this.btns[i]](this.settings.speed / 2);
+        i++;
       } else {
         clearInterval(loop);
       }
