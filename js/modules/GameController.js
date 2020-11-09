@@ -1,24 +1,23 @@
-import {areArraysEqual} from '../helpers.js';
-import LightController from './LightController.js';
+import { areArraysEqual } from '../helpers.js';
+import ActiveController from './ActiveController.js';
 import ScoreController from './ScoreController.js';
 import AudioController from './AudioController.js';
 
-export default class GameController
-{
+export default class GameController {
     constructor() {
         if (typeof GameController.instance === GameController) return GameController.instance;
-        
+
         GameController.instance = this;
 
         this.first = true;
-        
-        this.light = new LightController();
+
+        this.active = new ActiveController();
         this.score = new ScoreController();
         this.audio = new AudioController();
 
-        
         this.settings = {
             btns: ['green', 'red', 'yellow', 'cyan'],
+            speed: 1000,
         }
 
         Object.freeze(this.settings);
@@ -31,7 +30,7 @@ export default class GameController
     }
 
     start() {
-        this.setBtns();
+        this.playPc();
 
         if (!this.first) return;
 
@@ -42,13 +41,13 @@ export default class GameController
         this.first = false;
     }
 
-    setBtns() {
+    playPc() {
         this.userBtns = [];
 
         this.addRandonBtn();
 
         this.showPcBtns();
-        
+
         this.preventClick();
 
         this.allowClick();
@@ -73,13 +72,13 @@ export default class GameController
 
         const loop = setInterval(() => {
             if (this.i < this.pcBtns.length) {
-                eval(`this.light._${this.pcBtns[this.i]}()`);
+                eval(`this.active.${this.pcBtns[this.i]}(${this.settings.speed / 2})`);
 
-                 this.i++;
+                this.i++;
             } else {
                 clearInterval(loop);
             }
-        }, 1000);
+        }, this.settings.speed);
     }
 
     preventClick() {
@@ -99,8 +98,8 @@ export default class GameController
     btnsEvents() {
         this.btnsElms.forEach(btn => {
             btn.addEventListener('click', _ => {
-                eval(`this.light._${this.getBtn(btn)}(false)`);
-                
+                eval(`this.active.${this.getBtn(btn)}(500, false)`);
+
                 this.audio.clickAudio();
 
                 this.addUserBtn(btn);
@@ -135,7 +134,7 @@ export default class GameController
 
         this.score.plus();
 
-        this.setBtns();
+        this.playPc();
     }
 
     _new() {
@@ -143,6 +142,6 @@ export default class GameController
 
         this.score.clear();
 
-        this.setBtns();
+        this.playPc();
     }
 }

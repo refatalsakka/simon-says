@@ -30,7 +30,7 @@ export default class ScoreController {
 
         this.editHtml();
     }
-    
+
     plus() {
         if (this.monad < 9) {
             this.plusMonad();
