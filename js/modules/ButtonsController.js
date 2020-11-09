@@ -12,13 +12,13 @@ export default class ButtonsController {
     return this.settings.btns[elm.querySelector('a').dataset.nbr - 1];
   }
 
-  enable() {
+  disable() {
     this.buttons.forEach(btn => {
       btn.classList.add('disable');
     });
   }
 
-  disable() {
+  enable() {
     setTimeout(() => {
       this.buttons.forEach(btn => {
         btn.classList.remove('disable');
@@ -27,7 +27,7 @@ export default class ButtonsController {
   }
 
   enableAfterWhile() {
-    this.enable();
     this.disable();
+    this.enable();
   }
 }
