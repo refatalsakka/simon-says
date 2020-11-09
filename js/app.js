@@ -20,6 +20,7 @@ import UserController from './modules/UserController.js';
   const score = new ScoreController(settings);
   const user = new UserController(settings);
   const game = new GameController(score, audio, pc, user, buttons);
+  
   let first = true;
 
   document.querySelector('#new').addEventListener('click', _ => {
