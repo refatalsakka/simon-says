@@ -47,4 +47,4 @@ import UserController from './modules/UserController.js';
 
     first = false
   });
-})()
+})();
