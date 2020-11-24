@@ -7,6 +7,8 @@ import ScoreController from './modules/ScoreController.js';
 import UserController from './modules/UserController.js';
 
 (function () {
+  document.querySelectorAll('.active').forEach(btn => btn.classList.remove('active'));
+
   const settings = {
     btns: ['green', 'red', 'yellow', 'cyan'],
     speed: 1000,
