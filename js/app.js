@@ -6,14 +6,16 @@ import PcController from './modules/PcController.js';
 import ScoreController from './modules/ScoreController.js';
 import UserController from './modules/UserController.js';
 
+import elms from './elements.js';
+
 (function () {
-  document.querySelectorAll('.active').forEach(btn => btn.classList.remove('active'));
+  elms.getAll('.active').forEach(btn => btn.classList.remove('active'));
 
   const settings = {
     btns: ['green', 'red', 'yellow', 'cyan'],
     speed: 1000,
     waitingToEnable: 1000,
-  }
+  };
 
   const active = new ActiveController(settings);
   const audio = new AudioController();
@@ -23,30 +25,27 @@ import UserController from './modules/UserController.js';
   const user = new UserController(settings);
   const game = new GameController(score, audio, pc, user, buttons);
 
-  let first = true;
+  let gameStarted = false;
 
-  document.querySelector('#new').addEventListener('click', _ => {
-    settings.waitingToEnable = settings.speed;
+  function check(btn) {
+    active[buttons.get(btn)](false);
 
+    settings.waitingToEnable = (pc.getBtns().length * settings.speed) + settings.speed + 500;
+
+    audio.clickAudio();
+
+    user.addBtn(buttons.get(btn));
+
+    return game.continue() === true ? game._win() : game.lose();
+  }
+
+  elms.new.addEventListener('click', _ => {
     game._new();
 
-    if (!first) return;
+    if (!gameStarted) return;
 
-    buttons.get().forEach(btn => {
-      btn.addEventListener('click', _ => {
-        active[buttons.getOne(btn)](false);
+    elms.buttons.forEach(btn => btn.addEventListener('click', _ => check(btn)));
 
-        settings.waitingToEnable = ((pc.getBtns().length * settings.speed) + settings.speed + 500);
-
-        audio.clickAudio();
-        user.addBtn(buttons.getOne(btn));
-
-        if (game.continue() === true) return game._win();
-
-        return game.lose();
-      });
-    });
-
-    first = false
+    gameStarted = true;
   });
 })();

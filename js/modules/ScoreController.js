@@ -1,6 +1,8 @@
+import elms from '../elements.js';
+
 export default class ScoreController {
   constructor() {
-    this.imgs = document.querySelectorAll("#score img");
+    this.imgs = elms.getAll("#score img");
     this.leftImg = this.imgs[0];
     this.rightImg = this.imgs[1];
     this.monad = 0;

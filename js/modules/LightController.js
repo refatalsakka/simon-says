@@ -1,40 +1,35 @@
+import elms from '../elements.js';
+
 export default class LightController {
-  constructor() {
-    this.green = document.querySelector('#button-green');
-    this.red = document.querySelector('#button-red');
-    this.yellow = document.querySelector('#button-yellow');
-    this.cyan = document.querySelector('#button-cyan');
+  static greenOn() {
+    elms.getButton('green').classList.add('active');
   }
 
-  greenOn() {
-    this.green.classList.add('active');
+  static greenOff() {
+    elms.getButton('green').classList.remove('active');
   }
 
-  greenOff() {
-    this.green.classList.remove('active');
+  static redOn() {
+    elms.getButton('red').classList.add('active');
   }
 
-  redOn() {
-    this.red.classList.add('active');
+  static redOff() {
+    elms.getButton('red').classList.remove('active');
   }
 
-  redOff() {
-    this.red.classList.remove('active');
+  static yellowOn() {
+    elms.getButton('yellow').classList.add('active');
   }
 
-  yellowOn() {
-    this.yellow.classList.add('active');
+  static yellowOff() {
+    elms.getButton('yellow').classList.remove('active');
   }
 
-  yellowOff() {
-    this.yellow.classList.remove('active');
+  static cyanOn() {
+    elms.getButton('cyan').classList.add('active');
   }
 
-  cyanOn() {
-    this.cyan.classList.add('active');
-  }
-
-  cyanOff() {
-    this.cyan.classList.remove('active');
+  static cyanOff() {
+    elms.getButton('cyan').classList.remove('active');
   }
 }

@@ -2,7 +2,6 @@ export default class PcController {
   constructor(settings, active) {
     this.settings = settings;
     this.btns = [];
-
     this.active = active;
   }
 
