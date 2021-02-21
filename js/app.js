@@ -42,7 +42,7 @@ import elms from './elements.js';
   elms.new.addEventListener('click', _ => {
     game._new();
 
-    if (!gameStarted) return;
+    if (gameStarted) return;
 
     elms.buttons.forEach(btn => btn.addEventListener('click', _ => check(btn)));
 
